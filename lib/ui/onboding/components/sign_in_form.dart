@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rive/rive.dart';
-import 'package:securiter/api/api.dart';
+import 'package:securiter/api/Api.dart';
+import 'package:securiter/ui/dashboard/VDashboard.dart';
+import 'package:securiter/utils/Pref.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({
@@ -35,14 +37,15 @@ class _SignInFormState extends State<SignInForm> {
     return controller;
   }
 
-  void signIn(BuildContext context) {
+  void signIn(BuildContext context) async {
     setState(() {
       isShowLoading = true;
       isShowConfetti = true;
     });
+
     Future.delayed(const Duration(seconds: 1), () async {
       if (_formKey.currentState!.validate()) {
-        final resp = await ApiClient().loginUser(emailController.text, passwordController.text);
+        final resp = await Api().loginUser(emailController.text, passwordController.text);
         if (resp?.data?['statusCode'] == 401) {
           error.fire();
           Future.delayed(const Duration(seconds: 2), () async {
@@ -56,8 +59,11 @@ class _SignInFormState extends State<SignInForm> {
               isShowLoading = false;
             });
           });
+          String? token = resp?.data['backendTokens']['accessToken'].toString();
+          await Pref().setToken(token ?? '');
           check.fire();
           confetti.fire();
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const VDashboard()));
         }
       } else {
         error.fire();
@@ -69,6 +75,7 @@ class _SignInFormState extends State<SignInForm> {
       }
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

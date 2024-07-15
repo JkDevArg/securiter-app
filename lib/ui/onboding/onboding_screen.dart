@@ -1,10 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' show AnimatedPositioned, BackdropFilter, BuildContext, Column, CrossAxisAlignment, EdgeInsets, Image, MediaQuery, Padding, Positioned, SafeArea, Scaffold, SizedBox, Spacer, Stack, State, StatefulWidget, Text, TextStyle, Widget;
+import 'package:flutter/material.dart' show AnimatedPositioned, BackdropFilter, BuildContext, Column, CrossAxisAlignment, EdgeInsets, Image, MaterialPageRoute, MediaQuery, Padding, Positioned, SafeArea, Scaffold, SizedBox, Spacer, Stack, State, StatefulWidget, Text, TextStyle, Widget;
 import 'package:rive/rive.dart';
-import 'package:securiter/screens/onboding/components/animated_btn.dart';
-import 'package:securiter/screens/onboding/components/custom_sign_in.dart';
+import 'package:securiter/ui/dashboard/VDashboard.dart';
+import 'package:securiter/ui/onboding/components/animated_btn.dart';
+import 'package:securiter/ui/onboding/components/custom_sign_in.dart';
+import 'package:securiter/utils/Pref.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -19,8 +21,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   void initState() {
-    _btnAnimationController = OneShotAnimation("active", autoplay: false);
     super.initState();
+    _btnAnimationController = OneShotAnimation("active", autoplay: false);
+    //_checkToken();
+  }
+
+  Future<void> _checkToken() async {
+    String token = await Pref().getToken();
+    if (token.isNotEmpty) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const VDashboard()));
+    }
   }
 
   @override

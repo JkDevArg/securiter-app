@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/onboding/onboding_screen.dart';
+import 'package:securiter/helpers/sms_listener.dart';
+import 'ui/onboding/onboding_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const OnboardingScreen(),
+      /*builder: (context, child) {
+        SmsListener().startListening();
+        return child!;
+      },*/
     );
   }
 }

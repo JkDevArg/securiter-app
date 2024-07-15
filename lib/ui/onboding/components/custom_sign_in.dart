@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:securiter/screens/onboding/components/sign_in_form.dart';
+import 'package:securiter/ui/onboding/components/sign_in_form.dart';
 
 
 Future<Object?> customSigninDialog(BuildContext context,

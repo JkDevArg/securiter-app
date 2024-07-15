@@ -41,6 +41,11 @@ dependencies:
   flutter_svg: ^1.1.6
   dio: ^5.5.0+1
   flutter_platform_alert: ^0.5.1
+  appwrite: ^12.0.4
+  syncfusion_flutter_charts: ^26.1.41+1
+  getwidget: ^4.0.0
+  shared_preferences: ^2.2.3
+  telephony: ^0.2.0
 
 dev_dependencies:
   flutter_test:
