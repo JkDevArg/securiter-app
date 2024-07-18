@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:securiter/api/Api.dart';
-import 'package:securiter/utils/Pref.dart';
 
 class ValidatePhoneForm extends StatefulWidget {
   const ValidatePhoneForm({

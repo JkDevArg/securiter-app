@@ -46,6 +46,7 @@ class _SignInFormState extends State<SignInForm> {
     Future.delayed(const Duration(seconds: 1), () async {
       if (_formKey.currentState!.validate()) {
         final resp = await Api().loginUser(emailController.text, passwordController.text);
+        print(resp);
         if (resp?.data?['statusCode'] == 401) {
           error.fire();
           Future.delayed(const Duration(seconds: 2), () async {
